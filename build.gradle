@@ -15,7 +15,6 @@ plugins {
     id 'jacoco'
 }
 
-apply plugin: 'org.openrepose:gradle-codacy'
 
 group 'com.alten.spock'
 version '1.0-SNAPSHOT'
