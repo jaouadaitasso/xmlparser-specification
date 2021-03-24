@@ -23,6 +23,10 @@ dependencies {
 
     implementation 'org.codehaus.groovy:groovy-all:2.3.11'
 
+    // https://mvnrepository.com/artifact/net.bytebuddy/byte-buddy
+    implementation group: 'net.bytebuddy', name: 'byte-buddy', version: '1.10.18'
+
+
 }
 
 jacocoTestReport {

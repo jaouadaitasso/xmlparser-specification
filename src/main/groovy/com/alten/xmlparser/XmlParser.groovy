@@ -93,6 +93,14 @@ public class XmlParser implements ContentHandler {
         this(false, true);
     }
 
+    public Node getParent() {
+        return parent;
+    }
+
+    public void setParent(Node parent) {
+        this.parent = parent;
+    }
+
     /**
      * Creates a <code>XmlParser</code> which does not allow DOCTYPE declarations in documents.
      *
@@ -516,4 +524,5 @@ public class XmlParser implements ContentHandler {
         }
         return new QName(namespaceURI, name, prefix);
     }
+
 }

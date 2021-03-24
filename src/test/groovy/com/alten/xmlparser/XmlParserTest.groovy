@@ -39,17 +39,6 @@ class XmlParserTest extends Specification {
 
     }
 
-
-    def "isValidating()"() {
-
-        when: "We ask if the validating of the document is required while parsing it"
-        def realValidatingResult = new XmlParser(true, true).isNamespaceAware()
-        def expectedValidatingResult = true
-
-        then: "The expected and real results are matched"
-        expectedValidatingResult == realValidatingResult
-    }
-
     def "isTrimWhitespace()"() {
 
         when: "We set up TrimWhitespace option to false"
@@ -64,25 +53,44 @@ class XmlParserTest extends Specification {
 
     def "isNamespaceAware()"() {
 
-        when: "We ask if the handling of namespaces is setting up successfully"
-        def realNamespaceHandling = new XmlParser(true, true).isNamespaceAware()
+        given:
+        def xmlParser = new XmlParser(true, true)
+
+        when: "We ask if handling of namespaces is setting up successfully"
+        def realNamespaceHandling = xmlParser.isNamespaceAware()
         def expectedNamespaceHandling = true
 
         then: "The expected and real results are matched"
         expectedNamespaceHandling == realNamespaceHandling
     }
 
+    def "isNamespaceNotAware()"() {
+
+        given:
+        def xmlParser = new XmlParser(true, false)
+
+        when: "We ask if handling of namespaces is setting up successfully"
+        def realNamespaceHandling = xmlParser.isNamespaceAware()
+        def expectedNamespaceHandling = false
+
+        then: "The expected and real results are matched"
+        expectedNamespaceHandling == realNamespaceHandling
+    }
+
+
     def "isKeepIgnorableWhitespace()"() {
 
         when: "We ask if the keepIgnorableWhitespace option is set up successfully"
         def xmlParser = new XmlParser(true, true)
-        xmlParser.setKeepIgnorableWhitespace(false)
+        xmlParser.setKeepIgnorableWhitespace(true)
         def realKeepIgnorableWhitespaceOption = xmlParser.isKeepIgnorableWhitespace()
-        def expectedKeepIgnorableWhitespaceOption = false
+
+        def expectedKeepIgnorableWhitespaceOption = true
 
         then: "The expected and real results are matched"
         expectedKeepIgnorableWhitespaceOption == realKeepIgnorableWhitespaceOption
-    }
+   }
+
 
     def "setNamespaceAware()"() {
 
@@ -183,6 +191,7 @@ class XmlParserTest extends Specification {
         expectedRootName == realRootName.name()
     }
 
+
     def "parse(String uri)"() {
 
         when: "We ask for the root element name using parse(String uri) method"
@@ -230,6 +239,20 @@ class XmlParserTest extends Specification {
         then: "We verify that the current reader used by the parser has as origin the SAXParser object that we create"
         expectedSAXParser.getXMLReader() == realXmlParser.getXMLReader()
     }
+
+
+    def "parse(_), XMLReader Object is null"() {
+
+        given: "creation of a Mock Object for XmlParser class"
+        XmlParser xmlParser = Mock()
+
+        when: "when the getXMLReader is null"
+        xmlParser.getXMLReader() >> null
+
+        then: "Any parse method with whatever parameters will be invoked"
+        0 * xmlParser.parse(_)
+    }
+
 
     def "setDTDHandler"() {
 
@@ -331,7 +354,6 @@ class XmlParserTest extends Specification {
 
         given: "We create our basically xmlParser object"
         XmlParser xmlParser = new XmlParser()
-        final String PROPERTY_NAME_URI = "http://apache.org/xml/properties/input-buffer-size"
 
 
         when: "We set up the new property and its value to our object xmlParser"
@@ -342,6 +364,25 @@ class XmlParserTest extends Specification {
         then: "the two values for the properties are matched !"
         expectedPropertyValue == realPropertyValue
     }
+
+
+
+    def "addTextToNode()"() {
+        given:
+        XmlParser xmlParser = Mock()
+
+        when:
+        xmlParser.getParent() >> !null
+        xmlParser.isTrimWhitespace() >> false
+        xmlParser.isKeepIgnorableWhitespace() >> true
+
+        then:
+        1 * xmlParser.getParent().children().add(_)
+
+  }
+
+
+
 
 
 

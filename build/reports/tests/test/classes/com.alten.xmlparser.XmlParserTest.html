@@ -23,13 +23,13 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">21</div>
+<div class="counter">22</div>
 <p>tests</p>
 </div>
 </td>
 <td>
 <div class="infoBox" id="failures">
-<div class="counter">2</div>
+<div class="counter">0</div>
 <p>failures</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">1.650s</div>
+<div class="counter">2.300s</div>
 <p>duration</p>
 </div>
 </td>
@@ -50,8 +50,8 @@
 </div>
 </td>
 <td>
-<div class="infoBox failures" id="successRate">
-<div class="percent">90%</div>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
 <p>successful</p>
 </div>
 </td>
@@ -61,46 +61,13 @@
 <div id="tabs">
 <ul class="tabLinks">
 <li>
-<a href="#tab0">Failed tests</a>
+<a href="#tab0">Tests</a>
 </li>
 <li>
-<a href="#tab1">Tests</a>
-</li>
-<li>
-<a href="#tab2">Standard output</a>
-</li>
-<li>
-<a href="#tab3">Standard error</a>
+<a href="#tab1">Standard output</a>
 </li>
 </ul>
 <div id="tab0" class="tab">
-<h2>Failed tests</h2>
-<div class="test">
-<a name="parse(File file)"></a>
-<h3 class="failures">parse(File file)</h3>
-<span class="code">
-<pre>org.xml.sax.SAXParseException; systemId: file:///D:/1__JAOUAD%20BUREAU/Etudes/Cours/MQL-4/Formations/Spock/projects/xmlparser-specification/build/resources/test/NewTree.xml; lineNumber: 1; columnNumber: 1; Premature end of file.
-	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1243)
-	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:644)
-	at com.alten.xmlparser.XmlParser.parse(XmlParser.groovy:196)
-	at com.alten.xmlparser.XmlParserTest.parse(File file)(XmlParserTest.groovy:141)
-</pre>
-</span>
-</div>
-<div class="test">
-<a name="parse(InputSource inputSource)"></a>
-<h3 class="failures">parse(InputSource inputSource)</h3>
-<span class="code">
-<pre>org.xml.sax.SAXParseException; lineNumber: 1; columnNumber: 1; Premature end of file.
-	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1243)
-	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:644)
-	at com.alten.xmlparser.XmlParser.parse(XmlParser.groovy:213)
-	at com.alten.xmlparser.XmlParserTest.parse(InputSource inputSource)(XmlParserTest.groovy:169)
-</pre>
-</span>
-</div>
-</div>
-<div id="tab1" class="tab">
 <h2>Tests</h2>
 <table>
 <thead>
@@ -112,127 +79,122 @@
 </thead>
 <tr>
 <td class="success">Read xml file </td>
-<td class="success">0.563s</td>
+<td class="success">1.051s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">XmlParser(XMLReader xmlReader)</td>
-<td class="success">0.003s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">addTextToNode</td>
 <td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
+<td class="success">addTextToNode</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
 <td class="success">isKeepIgnorableWhitespace()</td>
-<td class="success">0.017s</td>
+<td class="success">0.003s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">isNamespaceAware()</td>
-<td class="success">0.007s</td>
+<td class="success">0.002s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">isNamespaceNotAware()</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">isTrimWhitespace()</td>
-<td class="success">0.144s</td>
+<td class="success">0.023s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="success">isValidating()</td>
-<td class="success">0.035s</td>
+<td class="success">parse(File file)</td>
+<td class="success">0.272s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="failures">parse(File file)</td>
-<td class="failures">0.529s</td>
-<td class="failures">failed</td>
+<td class="success">parse(InputSource inputSource)</td>
+<td class="success">0.006s</td>
+<td class="success">passed</td>
 </tr>
 <tr>
-<td class="failures">parse(InputSource inputSource)</td>
-<td class="failures">0.086s</td>
-<td class="failures">failed</td>
+<td class="success">parse(InputSource inputSource) throw Exception</td>
+<td class="success">0.638s</td>
+<td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">parse(InputStream inputStream)</td>
-<td class="success">0.011s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">parse(SAXParser saxParser)</td>
-<td class="success">0.021s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">parse(String uri)</td>
-<td class="success">0.016s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">parse(StringReader stringReader)</td>
-<td class="success">0.016s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">parse(XMLReader xmlReader) &amp; getXMLReader()</td>
-<td class="success">0.015s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">parseText(String string)</td>
-<td class="success">0.035s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">setDTDHandler</td>
-<td class="success">0.026s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">setEntityResolver</td>
-<td class="success">0.044s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">setErrorHandler</td>
-<td class="success">0.024s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">setFeature(String name, boolean value)</td>
-<td class="success">0.019s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">setNamespaceAware()</td>
 <td class="success">0.005s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
+<td class="success">parse(SAXParser saxParser)</td>
+<td class="success">0.008s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">parse(String uri)</td>
+<td class="success">0.213s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">parse(StringReader stringReader)</td>
+<td class="success">0.004s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">parse(XMLReader xmlReader) &amp; getXMLReader()</td>
+<td class="success">0.016s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">parseText(String string)</td>
+<td class="success">0.002s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">setDTDHandler</td>
+<td class="success">0.014s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">setEntityResolver</td>
+<td class="success">0.017s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">setErrorHandler</td>
+<td class="success">0.011s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">setFeature(String name, boolean value)</td>
+<td class="success">0.005s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">setNamespaceAware()</td>
+<td class="success">0.002s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
 <td class="success">setProperty(String name, Object value)</td>
-<td class="success">0.032s</td>
+<td class="success">0.004s</td>
 <td class="success">passed</td>
 </tr>
 </table>
 </div>
-<div id="tab2" class="tab">
+<div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
 <pre>2
 [uno]
 
-No signature of method: java.io.BufferedInputStream.transferTo() is applicable for argument types: (java.io.FileOutputStream) values: [java.io.FileOutputStream@650325c9]
-No signature of method: java.io.BufferedInputStream.transferTo() is applicable for argument types: (java.io.FileOutputStream) values: [java.io.FileOutputStream@290f1cb3]
-</pre>
-</span>
-</div>
-<div id="tab3" class="tab">
-<h2>Standard error</h2>
-<span class="code">
-<pre>[Fatal Error] NewTree.xml:1:1: Premature end of file.
-[Fatal Error] :1:1: Premature end of file.
 </pre>
 </span>
 </div>
@@ -244,7 +206,7 @@ No signature of method: java.io.BufferedInputStream.transferTo() is applicable f
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 6.7</a> at Mar 24, 2021 8:33:37 AM</p>
+<a href="http://www.gradle.org">Gradle 6.7</a> at 24 mars 2021 à 15:56:49</p>
 </div>
 </div>
 </body>
