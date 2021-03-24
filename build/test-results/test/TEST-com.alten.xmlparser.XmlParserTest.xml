@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.alten.xmlparser.XmlParserTest" tests="21" skipped="0" failures="2" errors="0" timestamp="2021-03-24T07:33:35" hostname="DESKTOP-EEAQ996" time="1.688">
+  <properties/>
+  <testcase name="Read xml file " classname="com.alten.xmlparser.XmlParserTest" time="0.563"/>
+  <testcase name="isValidating()" classname="com.alten.xmlparser.XmlParserTest" time="0.035"/>
+  <testcase name="isTrimWhitespace()" classname="com.alten.xmlparser.XmlParserTest" time="0.144"/>
+  <testcase name="isNamespaceAware()" classname="com.alten.xmlparser.XmlParserTest" time="0.007"/>
+  <testcase name="isKeepIgnorableWhitespace()" classname="com.alten.xmlparser.XmlParserTest" time="0.017"/>
+  <testcase name="setNamespaceAware()" classname="com.alten.xmlparser.XmlParserTest" time="0.005"/>
+  <testcase name="XmlParser(XMLReader xmlReader)" classname="com.alten.xmlparser.XmlParserTest" time="0.003"/>
+  <testcase name="parse(StringReader stringReader)" classname="com.alten.xmlparser.XmlParserTest" time="0.016"/>
+  <testcase name="parseText(String string)" classname="com.alten.xmlparser.XmlParserTest" time="0.035"/>
+  <testcase name="parse(File file)" classname="com.alten.xmlparser.XmlParserTest" time="0.529">
+    <failure message="org.xml.sax.SAXParseException; systemId: file:///D:/1__JAOUAD%20BUREAU/Etudes/Cours/MQL-4/Formations/Spock/projects/xmlparser-specification/build/resources/test/NewTree.xml; lineNumber: 1; columnNumber: 1; Premature end of file." type="org.xml.sax.SAXParseException">org.xml.sax.SAXParseException; systemId: file:///D:/1__JAOUAD%20BUREAU/Etudes/Cours/MQL-4/Formations/Spock/projects/xmlparser-specification/build/resources/test/NewTree.xml; lineNumber: 1; columnNumber: 1; Premature end of file.
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1243)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:644)
+	at com.alten.xmlparser.XmlParser.parse(XmlParser.groovy:196)
+	at com.alten.xmlparser.XmlParserTest.parse(File file)(XmlParserTest.groovy:141)
+</failure>
+  </testcase>
+  <testcase name="parse(InputSource inputSource)" classname="com.alten.xmlparser.XmlParserTest" time="0.086">
+    <failure message="org.xml.sax.SAXParseException; lineNumber: 1; columnNumber: 1; Premature end of file." type="org.xml.sax.SAXParseException">org.xml.sax.SAXParseException; lineNumber: 1; columnNumber: 1; Premature end of file.
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1243)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:644)
+	at com.alten.xmlparser.XmlParser.parse(XmlParser.groovy:213)
+	at com.alten.xmlparser.XmlParserTest.parse(InputSource inputSource)(XmlParserTest.groovy:169)
+</failure>
+  </testcase>
+  <testcase name="parse(InputStream inputStream)" classname="com.alten.xmlparser.XmlParserTest" time="0.011"/>
+  <testcase name="parse(String uri)" classname="com.alten.xmlparser.XmlParserTest" time="0.016"/>
+  <testcase name="parse(XMLReader xmlReader) &amp; getXMLReader()" classname="com.alten.xmlparser.XmlParserTest" time="0.015"/>
+  <testcase name="parse(SAXParser saxParser)" classname="com.alten.xmlparser.XmlParserTest" time="0.021"/>
+  <testcase name="setDTDHandler" classname="com.alten.xmlparser.XmlParserTest" time="0.026"/>
+  <testcase name="setEntityResolver" classname="com.alten.xmlparser.XmlParserTest" time="0.044"/>
+  <testcase name="setErrorHandler" classname="com.alten.xmlparser.XmlParserTest" time="0.024"/>
+  <testcase name="setFeature(String name, boolean value)" classname="com.alten.xmlparser.XmlParserTest" time="0.019"/>
+  <testcase name="setProperty(String name, Object value)" classname="com.alten.xmlparser.XmlParserTest" time="0.032"/>
+  <testcase name="addTextToNode" classname="com.alten.xmlparser.XmlParserTest" time="0.002"/>
+  <system-out><![CDATA[2
+[uno]
+
+No signature of method: java.io.BufferedInputStream.transferTo() is applicable for argument types: (java.io.FileOutputStream) values: [java.io.FileOutputStream@650325c9]
+No signature of method: java.io.BufferedInputStream.transferTo() is applicable for argument types: (java.io.FileOutputStream) values: [java.io.FileOutputStream@290f1cb3]
+]]></system-out>
+  <system-err><![CDATA[[Fatal Error] NewTree.xml:1:1: Premature end of file.
+[Fatal Error] :1:1: Premature end of file.
+]]></system-err>
+</testsuite>

@@ -133,7 +133,7 @@ class XmlParserTest extends Specification {
 
         given: "We convert an InputStream object to a File object"
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Tree.xml")
-        File file = new File("Tree.xml")
+        File file = new File("build/resources/test/NewTree.xml")
         // Java 9
         copyInputStreamToFile(inputStream, file)
 
@@ -161,7 +161,7 @@ class XmlParserTest extends Specification {
 
         given: "We convert an InputStream object to a File object"
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Tree.xml")
-        File file = new File("Tree.xml")
+        File file = new File("build/resources/test/NewTree.xml")
         // Java 9
         copyInputStreamToFile(inputStream, file)
 
@@ -188,7 +188,6 @@ class XmlParserTest extends Specification {
         when: "We ask for the root element name using parse(String uri) method"
         def realRootName = new XmlParser().parse(this.getClass().getClassLoader().getResource("Tree.xml").path)
         def expectedRootName = "root"
-
         then: "The expected and real results are matched"
         expectedRootName == realRootName.name()
 
@@ -224,7 +223,7 @@ class XmlParserTest extends Specification {
     def "parse(SAXParser saxParser)"() {
 
         when: "We create a new custom XmlParser using the SAXParser type"
-        SAXParserFactory factory = SAXParserFactory.newDefaultInstance()
+        SAXParserFactory factory = SAXParserFactory.newInstance()
         SAXParser expectedSAXParser = factory.newSAXParser()
         XmlParser realXmlParser = new XmlParser(expectedSAXParser)
 
