@@ -472,8 +472,4 @@ class XmlParserTest extends Specification {
         bodyText == xmlParser.getBodyText()
     }
 
-
-
-
-
 }
