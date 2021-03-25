@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<documents>
+    <document id="10">
+        <title>Ingénierie de l'objet en Java</title>
+        <price>650</price>
+        <authors>
+            <author id="100">
+                <name>James Gosling</name>
+                <year-born>1955</year-born>
+                <country>Canada</country>
+            </author>
+        </authors>
+    </document>
+    <document id="20">
+        <title>Automatisation des Tests unitaires avec JUnit</title>
+        <price>754</price>
+        <authors>
+            <author id="101">
+                <name>Erich Gamma</name>
+                <year-born>1961</year-born>
+                <country>Suisse</country>
+            </author>
+            <author id="100">
+                <name>James Gosling</name>
+                <year-born>1955</year-born>
+                <country>Canada</country>
+            </author>
+        </authors>
+    </document>
+    <document id="30">
+        <title>Ingénierie du Web avec JavaScript</title>
+        <price>756</price>
+        <authors>
+            <author id="102">
+                <name>Brendan Eich</name>
+                <year-born>1961</year-born>
+                <country>USA</country>
+            </author>
+        </authors>
+    </document>
+</documents>

@@ -23,21 +23,19 @@ import java.util.stream.Stream
 
 class XmlParserTest extends Specification {
 
+    InputStream inputStream
 
-    @Shared xmlContent = '''
-                            <root>
-                                <one a1="uno"></one>
-                                <two>Some text !</two>
-                            </root>
-                         '''
+    def setup() {
+        inputStream = this.getClass().getClassLoader().getResourceAsStream("documents.xml")
+    }
+
 
     def "Read xml file "() {
-        when: "Read xml file using XmlParser"
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Tree.xml")
+        when: "Read xml file using XmlParser and displaying some info"
         def xmlParser = new XmlParser().parseText(convertInputStreamToString(inputStream))
         println xmlParser.'*'.size()
-        println xmlParser.one.@a1
-        println xmlParser.two.text()
+        println xmlParser.document.@id
+        println xmlParser.document[1]
 
         then: "xml content should be tested"
 
@@ -124,9 +122,8 @@ class XmlParserTest extends Specification {
     def "parse(StringReader stringReader)"() {
 
         when: "We ask for the root element name using parse(StringReader stringReader) method"
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Tree.xml")
         def realRootName = new XmlParser().parse(new StringReader(convertInputStreamToString(inputStream)))
-        def expectedRootName = "root"
+        def expectedRootName = "documents"
 
         then: "The expected and real results are matched"
         expectedRootName == realRootName.name()
@@ -152,9 +149,8 @@ class XmlParserTest extends Specification {
     def "parseText(String string)"() {
 
         when: "We ask for the root element name using parseText(String string) method"
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Tree.xml")
         def realRootName = new XmlParser().parseText(convertInputStreamToString(inputStream))
-        def expectedRootName = "root"
+        def expectedRootName = "documents"
 
         then: "The expected and real results are matched"
         expectedRootName == realRootName.name()
@@ -163,14 +159,13 @@ class XmlParserTest extends Specification {
     def "parse(File file)"() {
 
         given: "We convert an InputStream object to a File object"
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Tree.xml")
         File file = new File("build/resources/test/NewTree.xml")
         // Java 9
         copyInputStreamToFile(inputStream, file)
 
         when: "We ask for the root element name using parse(File file) method"
         def realRootName = new XmlParser().parse(file)
-        def expectedRootName = "root"
+        def expectedRootName = "documents"
 
         then: "The expected and real results are matched"
         expectedRootName == realRootName.name()
@@ -191,14 +186,13 @@ class XmlParserTest extends Specification {
     def "parse(InputSource inputSource)"() {
 
         given: "We convert an InputStream object to a File object"
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Tree.xml")
         File file = new File("build/resources/test/NewTree.xml")
         // Java 9
         copyInputStreamToFile(inputStream, file)
 
         when: "We ask for the root element name using parse(InputSource inputSource) method"
         def realRootName = new XmlParser().parse(new InputSource(new FileInputStream(file)))
-        def expectedRootName = "root"
+        def expectedRootName = "documents"
 
         then: "The expected and real results are matched"
         expectedRootName == realRootName.name()
@@ -207,8 +201,8 @@ class XmlParserTest extends Specification {
     def "parse(InputStream inputStream)"() {
 
         when: "We ask for the root element name using parse(InputSteam inputStream) method"
-        def realRootName = new XmlParser().parse(this.getClass().getClassLoader().getResourceAsStream("Tree.xml"))
-        def expectedRootName = "root"
+        def realRootName = new XmlParser().parse(inputStream)
+        def expectedRootName = "documents"
 
         then: "The expected and real results are matched"
         expectedRootName == realRootName.name()
@@ -218,8 +212,8 @@ class XmlParserTest extends Specification {
     def "parse(String uri)"() {
 
         when: "We ask for the root element name using parse(String uri) method"
-        def realRootName = new XmlParser().parse(this.getClass().getClassLoader().getResource("Tree.xml").path)
-        def expectedRootName = "root"
+        def realRootName = new XmlParser().parse(this.getClass().getClassLoader().getResource("documents.xml").path)
+        def expectedRootName = "documents"
         then: "The expected and real results are matched"
         expectedRootName == realRootName.name()
 
