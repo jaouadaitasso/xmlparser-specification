@@ -2,7 +2,6 @@ plugins {
     id 'groovy'
     id 'java'
     id 'jacoco'
-    id "org.sonarqube" version "3.1.1"
 }
 
 
@@ -40,10 +39,3 @@ jacocoTestReport {
     }
 }
 
-sonarqube {
-  properties {
-    property "sonar.projectKey", "jaouadaitasso_xmlparser-specification"
-    property "sonar.organization", "jaouadaitasso"
-    property "sonar.host.url", "https://sonarcloud.io"
-  }
-}

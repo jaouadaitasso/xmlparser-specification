@@ -1,14 +1,17 @@
 package com.alten.xmlparser
 
+import groovy.xml.QName
 import org.w3c.dom.NodeList
 import org.xml.sax.DTDHandler
 import org.xml.sax.EntityResolver
 import org.xml.sax.ErrorHandler
 import org.xml.sax.InputSource
+import org.xml.sax.Locator
 import org.xml.sax.SAXException
 import org.xml.sax.SAXParseException
 import org.xml.sax.XMLReader
 import org.xml.sax.helpers.DefaultHandler
+import org.xml.sax.helpers.LocatorImpl
 import org.xml.sax.helpers.XMLReaderFactory
 import spock.lang.Shared
 import spock.lang.Specification
@@ -30,7 +33,8 @@ class XmlParserTest extends Specification {
 
     def "Read xml file "() {
         when: "Read xml file using XmlParser"
-        def xmlParser = new XmlParser().parseText(xmlContent)
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Tree.xml")
+        def xmlParser = new XmlParser().parseText(convertInputStreamToString(inputStream))
         println xmlParser.'*'.size()
         println xmlParser.one.@a1
         println xmlParser.two.text()
@@ -120,17 +124,36 @@ class XmlParserTest extends Specification {
     def "parse(StringReader stringReader)"() {
 
         when: "We ask for the root element name using parse(StringReader stringReader) method"
-        def realRootName = new XmlParser().parse(new StringReader(xmlContent))
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Tree.xml")
+        def realRootName = new XmlParser().parse(new StringReader(convertInputStreamToString(inputStream)))
         def expectedRootName = "root"
 
         then: "The expected and real results are matched"
         expectedRootName == realRootName.name()
     }
 
+    private static String convertInputStreamToString(InputStream inputStream)
+            throws IOException {
+
+        String newLine = System.getProperty("line.separator")
+        String result = ""
+        try {
+            Stream<String> lines = new BufferedReader(new InputStreamReader(inputStream)).lines()
+            result = lines.collect(Collectors.joining(newLine))
+        } catch(Exception e){
+            println e.getMessage()
+        }
+
+        return result
+
+    }
+
+
     def "parseText(String string)"() {
 
         when: "We ask for the root element name using parseText(String string) method"
-        def realRootName = new XmlParser().parseText(xmlContent)
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Tree.xml")
+        def realRootName = new XmlParser().parseText(convertInputStreamToString(inputStream))
         def expectedRootName = "root"
 
         then: "The expected and real results are matched"
@@ -202,21 +225,6 @@ class XmlParserTest extends Specification {
 
     }
 
-    private static String convertInputStreamToString(InputStream inputStream)
-            throws IOException {
-
-        String newLine = System.getProperty("line.separator")
-        String result
-        try {
-            Stream<String> lines = new BufferedReader(new InputStreamReader(inputStream)).lines()
-            result = lines.collect(Collectors.joining(newLine))
-        } catch(Exception e){
-            println e.getMessage()
-        }
-
-        return result
-
-    }
 
     def "parse(XMLReader xmlReader) & getXMLReader()"() {
 
@@ -372,47 +380,7 @@ class XmlParserTest extends Specification {
         1 * list.add(_ as String)
     }
 
-    def "addTextToNode() trimWhitespace => true, keepIgnorableWhitespace => true"() {
-        given: "Initialization of mocked NodeList and Node objects, and also the real object XmlParser"
-        groovy.util.NodeList list = Mock(groovy.util.NodeList)
-        // Initialization of a mocked node
-        Node parent= Mock(Node)
-        // Initialization of a real XmlParser object
-        XmlParser xmlParser = new XmlParser()
-        // setting up the node parent of the XmlParser object
-        xmlParser.setParent(parent)
-        parent.children() >> list
 
-        when: "When calling the addTextToNode method"
-        xmlParser.setTrimWhitespace(true)
-        xmlParser.setKeepIgnorableWhitespace(true)
-        xmlParser.addTextToNode()
-
-        then: "the parent.children() that return the 'list' object that we just create should be invoked," +
-                "therefore, it should invoke also its add() method"
-        0 * list.add(_ as String)
-    }
-
-    def "addTextToNode() trimWhitespace => true, keepIgnorableWhitespace => false"() {
-        given: "Initialization of mocked NodeList and Node objects, and also the real object XmlParser"
-        groovy.util.NodeList list = Mock(groovy.util.NodeList)
-        // Initialization of a mocked node
-        Node parent= Mock(Node)
-        // Initialization of a real XmlParser object
-        XmlParser xmlParser = new XmlParser()
-        // setting up the node parent of the XmlParser object
-        xmlParser.setParent(parent)
-        parent.children() >> list
-
-        when: "When calling the addTextToNode method"
-        xmlParser.setTrimWhitespace(true)
-        xmlParser.setKeepIgnorableWhitespace(false)
-        xmlParser.addTextToNode()
-
-        then: "the parent.children() that return the 'list' object that we just create should be invoked," +
-                "therefore, it should invoke also its add() method"
-        0 * list.add(_ as String)
-    }
 
 
 
@@ -461,8 +429,54 @@ class XmlParserTest extends Specification {
     }
 
 
+    def "getElementName(String namespaceURI, String localName, String qName) => localName == null"() {
+        given:
+        XmlParser xmlParser = new XmlParser()
+
+        expect:
+        new QName("https://...", "foo:", "foo") ==
+                xmlParser.getElementName("https://...", null, "foo:")
+    }
 
 
+    def "getDocumentLocator()"() {
+        given:
+
+        Locator locator = new LocatorImpl()
+        XmlParser xmlParser = new XmlParser()
+
+        when: "Setting up the current locator to our usual object XmlParser"
+        xmlParser.setDocumentLocator(locator)
+
+        then:
+        locator == xmlParser.getDocumentLocator()
+    }
+
+    def "getParent()"() {
+        given:
+
+        Node parent = new Node(null, "newElement", "Some text goes here !")
+        XmlParser xmlParser = new XmlParser()
+
+        when: "Setting up the current parent to our usual object XmlParser"
+        xmlParser.setParent(parent)
+
+        then:
+        parent == xmlParser.getParent()
+    }
+
+    def "getBodyText()"() {
+        given:
+
+        StringBuilder bodyText = new StringBuilder()
+        XmlParser xmlParser = new XmlParser()
+
+        when: "Setting up the current parent to our usual object XmlParser"
+        xmlParser.setBodyText(bodyText)
+
+        then:
+        bodyText == xmlParser.getBodyText()
+    }
 
 
 
