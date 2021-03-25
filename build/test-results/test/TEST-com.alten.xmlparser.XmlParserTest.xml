@@ -1,28 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.alten.xmlparser.XmlParserTest" tests="22" skipped="0" failures="0" errors="0" timestamp="2021-03-24T14:56:46" hostname="20183069-MAFES" time="2.305">
+<testsuite name="com.alten.xmlparser.XmlParserTest" tests="26" skipped="0" failures="0" errors="0" timestamp="2021-03-25T10:31:51" hostname="20183069-MAFES" time="1.56">
   <properties/>
-  <testcase name="Read xml file " classname="com.alten.xmlparser.XmlParserTest" time="1.051"/>
-  <testcase name="isTrimWhitespace()" classname="com.alten.xmlparser.XmlParserTest" time="0.023"/>
-  <testcase name="isNamespaceAware()" classname="com.alten.xmlparser.XmlParserTest" time="0.002"/>
-  <testcase name="isNamespaceNotAware()" classname="com.alten.xmlparser.XmlParserTest" time="0.001"/>
-  <testcase name="isKeepIgnorableWhitespace()" classname="com.alten.xmlparser.XmlParserTest" time="0.003"/>
-  <testcase name="setNamespaceAware()" classname="com.alten.xmlparser.XmlParserTest" time="0.002"/>
+  <testcase name="Read xml file " classname="com.alten.xmlparser.XmlParserTest" time="0.36"/>
+  <testcase name="isTrimWhitespace()" classname="com.alten.xmlparser.XmlParserTest" time="0.018"/>
+  <testcase name="isNamespaceAware()" classname="com.alten.xmlparser.XmlParserTest" time="0.005"/>
+  <testcase name="isNamespaceNotAware()" classname="com.alten.xmlparser.XmlParserTest" time="0.002"/>
+  <testcase name="isKeepIgnorableWhitespace()" classname="com.alten.xmlparser.XmlParserTest" time="0.005"/>
+  <testcase name="setNamespaceAware()" classname="com.alten.xmlparser.XmlParserTest" time="0.004"/>
   <testcase name="XmlParser(XMLReader xmlReader)" classname="com.alten.xmlparser.XmlParserTest" time="0.002"/>
-  <testcase name="parse(StringReader stringReader)" classname="com.alten.xmlparser.XmlParserTest" time="0.004"/>
-  <testcase name="parseText(String string)" classname="com.alten.xmlparser.XmlParserTest" time="0.002"/>
-  <testcase name="parse(File file)" classname="com.alten.xmlparser.XmlParserTest" time="0.272"/>
+  <testcase name="parse(StringReader stringReader)" classname="com.alten.xmlparser.XmlParserTest" time="0.008"/>
+  <testcase name="parseText(String string)" classname="com.alten.xmlparser.XmlParserTest" time="0.004"/>
+  <testcase name="parse(File file)" classname="com.alten.xmlparser.XmlParserTest" time="0.051"/>
   <testcase name="parse(InputSource inputSource)" classname="com.alten.xmlparser.XmlParserTest" time="0.006"/>
-  <testcase name="parse(InputSource inputSource) throw Exception" classname="com.alten.xmlparser.XmlParserTest" time="0.638"/>
-  <testcase name="parse(InputStream inputStream)" classname="com.alten.xmlparser.XmlParserTest" time="0.005"/>
-  <testcase name="parse(String uri)" classname="com.alten.xmlparser.XmlParserTest" time="0.213"/>
-  <testcase name="parse(XMLReader xmlReader) &amp; getXMLReader()" classname="com.alten.xmlparser.XmlParserTest" time="0.016"/>
-  <testcase name="parse(SAXParser saxParser)" classname="com.alten.xmlparser.XmlParserTest" time="0.008"/>
-  <testcase name="setDTDHandler" classname="com.alten.xmlparser.XmlParserTest" time="0.014"/>
-  <testcase name="setEntityResolver" classname="com.alten.xmlparser.XmlParserTest" time="0.017"/>
+  <testcase name="parse(InputStream inputStream)" classname="com.alten.xmlparser.XmlParserTest" time="0.006"/>
+  <testcase name="parse(String uri)" classname="com.alten.xmlparser.XmlParserTest" time="0.012"/>
+  <testcase name="parse(XMLReader xmlReader) &amp; getXMLReader()" classname="com.alten.xmlparser.XmlParserTest" time="0.008"/>
+  <testcase name="parse(SAXParser saxParser)" classname="com.alten.xmlparser.XmlParserTest" time="0.004"/>
+  <testcase name="parse(_), XMLReader Object is null" classname="com.alten.xmlparser.XmlParserTest" time="0.788"/>
+  <testcase name="setDTDHandler" classname="com.alten.xmlparser.XmlParserTest" time="0.004"/>
+  <testcase name="setEntityResolver" classname="com.alten.xmlparser.XmlParserTest" time="0.01"/>
   <testcase name="setErrorHandler" classname="com.alten.xmlparser.XmlParserTest" time="0.011"/>
   <testcase name="setFeature(String name, boolean value)" classname="com.alten.xmlparser.XmlParserTest" time="0.005"/>
-  <testcase name="setProperty(String name, Object value)" classname="com.alten.xmlparser.XmlParserTest" time="0.004"/>
-  <testcase name="addTextToNode" classname="com.alten.xmlparser.XmlParserTest" time="0.001"/>
+  <testcase name="setProperty(String name, Object value)" classname="com.alten.xmlparser.XmlParserTest" time="0.006"/>
+  <testcase name="addTextToNode() trimWhitespace =&gt; false, keepIgnorableWhitespace =&gt; true" classname="com.alten.xmlparser.XmlParserTest" time="0.226"/>
+  <testcase name="addTextToNode() trimWhitespace =&gt; true, keepIgnorableWhitespace =&gt; true" classname="com.alten.xmlparser.XmlParserTest" time="0.003"/>
+  <testcase name="addTextToNode() trimWhitespace =&gt; true, keepIgnorableWhitespace =&gt; false" classname="com.alten.xmlparser.XmlParserTest" time="0.002"/>
+  <testcase name="addTextToNode() trimWhitespace =&gt; false, text.trim().length &gt; 0" classname="com.alten.xmlparser.XmlParserTest" time="0.003"/>
+  <testcase name="addTextToNode() text.trim().length &gt; 0" classname="com.alten.xmlparser.XmlParserTest" time="0.003"/>
   <system-out><![CDATA[2
 [uno]
 

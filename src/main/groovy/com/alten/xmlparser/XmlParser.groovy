@@ -19,7 +19,6 @@ package com.alten.xmlparser;
  *  under the License.
  */
 
-import groovy.util.Node;
 import groovy.xml.FactorySupport;
 import groovy.xml.QName;
 import org.xml.sax.Attributes;
@@ -37,17 +36,7 @@ import org.xml.sax.XMLReader;
 import javax.xml.XMLConstants;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Reader;
-import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import javax.xml.parsers.SAXParserFactory
 
 /**
  * A helper class for parsing XML into a tree of Node instances for a
@@ -101,6 +90,14 @@ public class XmlParser implements ContentHandler {
         this.parent = parent;
     }
 
+
+    public StringBuilder getBodyText() {
+        return bodyText
+    }
+
+    public void setBodyText(StringBuilder bodyText) {
+        this.bodyText = bodyText
+    }
     /**
      * Creates a <code>XmlParser</code> which does not allow DOCTYPE declarations in documents.
      *

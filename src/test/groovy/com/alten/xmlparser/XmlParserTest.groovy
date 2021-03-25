@@ -1,5 +1,6 @@
 package com.alten.xmlparser
 
+import org.w3c.dom.NodeList
 import org.xml.sax.DTDHandler
 import org.xml.sax.EntityResolver
 import org.xml.sax.ErrorHandler
@@ -8,7 +9,6 @@ import org.xml.sax.SAXException
 import org.xml.sax.SAXParseException
 import org.xml.sax.XMLReader
 import org.xml.sax.helpers.DefaultHandler
-import org.xml.sax.helpers.XMLReaderAdapter
 import org.xml.sax.helpers.XMLReaderFactory
 import spock.lang.Shared
 import spock.lang.Specification
@@ -350,36 +350,115 @@ class XmlParserTest extends Specification {
         expectedPropertyValue == realPropertyValue
     }
 
-    def "addTextToNode"() {
 
-        given: "We create our basically xmlParser object"
+    def "addTextToNode() trimWhitespace => false, keepIgnorableWhitespace => true"() {
+        given: "Initialization of mocked NodeList and Node objects, and also the real object XmlParser"
+        groovy.util.NodeList list = Mock(groovy.util.NodeList)
+        // Initialization of a mocked node
+        Node parent= Mock(Node)
+        // Initialization of a real XmlParser object
         XmlParser xmlParser = new XmlParser()
+        // setting up the node parent of the XmlParser object
+        xmlParser.setParent(parent)
+        parent.children() >> list
 
+        when: "When calling the addTextToNode method"
+        xmlParser.setTrimWhitespace(false)
+        xmlParser.setKeepIgnorableWhitespace(true)
+        xmlParser.addTextToNode()
 
-        when: "We set up the new property and its value to our object xmlParser"
-        int expectedPropertyValue = 2048
-        xmlParser.setProperty(PROPERTY_NAME_URI, new Integer(expectedPropertyValue))
-        int realPropertyValue = (int) xmlParser.getProperty(PROPERTY_NAME_URI)
+        then: "the parent.children() that return the 'list' object that we just create should be invoked," +
+              "therefore, it should invoke also its add() method"
+        1 * list.add(_ as String)
+    }
 
-        then: "the two values for the properties are matched !"
-        expectedPropertyValue == realPropertyValue
+    def "addTextToNode() trimWhitespace => true, keepIgnorableWhitespace => true"() {
+        given: "Initialization of mocked NodeList and Node objects, and also the real object XmlParser"
+        groovy.util.NodeList list = Mock(groovy.util.NodeList)
+        // Initialization of a mocked node
+        Node parent= Mock(Node)
+        // Initialization of a real XmlParser object
+        XmlParser xmlParser = new XmlParser()
+        // setting up the node parent of the XmlParser object
+        xmlParser.setParent(parent)
+        parent.children() >> list
+
+        when: "When calling the addTextToNode method"
+        xmlParser.setTrimWhitespace(true)
+        xmlParser.setKeepIgnorableWhitespace(true)
+        xmlParser.addTextToNode()
+
+        then: "the parent.children() that return the 'list' object that we just create should be invoked," +
+                "therefore, it should invoke also its add() method"
+        0 * list.add(_ as String)
+    }
+
+    def "addTextToNode() trimWhitespace => true, keepIgnorableWhitespace => false"() {
+        given: "Initialization of mocked NodeList and Node objects, and also the real object XmlParser"
+        groovy.util.NodeList list = Mock(groovy.util.NodeList)
+        // Initialization of a mocked node
+        Node parent= Mock(Node)
+        // Initialization of a real XmlParser object
+        XmlParser xmlParser = new XmlParser()
+        // setting up the node parent of the XmlParser object
+        xmlParser.setParent(parent)
+        parent.children() >> list
+
+        when: "When calling the addTextToNode method"
+        xmlParser.setTrimWhitespace(true)
+        xmlParser.setKeepIgnorableWhitespace(false)
+        xmlParser.addTextToNode()
+
+        then: "the parent.children() that return the 'list' object that we just create should be invoked," +
+                "therefore, it should invoke also its add() method"
+        0 * list.add(_ as String)
     }
 
 
 
-    def "addTextToNode()"() {
-        given:
-        XmlParser xmlParser = Mock()
+    def "addTextToNode() trimWhitespace => false, text.trim().length > 0"() {
+        given: "Initialization of mocked NodeList and Node objects, and also the real object XmlParser"
+        groovy.util.NodeList list = Mock(groovy.util.NodeList)
+        // Initialization of a mocked node
+        Node parent= Mock(Node)
+        StringBuilder bodyText = new StringBuilder("This chain of characters has a length > 0")
+        // Initialization of a real XmlParser object
+        XmlParser xmlParser = new XmlParser()
+        // setting up the node parent and the bodyText of the XmlParser object
+        xmlParser.setParent(parent)
+        xmlParser.setBodyText(bodyText)
+        parent.children() >> list
 
-        when:
-        xmlParser.getParent() >> !null
-        xmlParser.isTrimWhitespace() >> false
-        xmlParser.isKeepIgnorableWhitespace() >> true
+        when: "When calling the addTextToNode method"
+        xmlParser.setTrimWhitespace(false)
+        xmlParser.addTextToNode()
 
-        then:
-        1 * xmlParser.getParent().children().add(_)
+        then: "the parent.children() that return the 'list' object that we just create should be invoked," +
+                "therefore, it should invoke also its add() method"
+        1 * list.add(_ as String)
+    }
 
-  }
+    def "addTextToNode() text.trim().length > 0"() {
+        given: "Initialization of mocked NodeList and Node objects, and also the real object XmlParser"
+        groovy.util.NodeList list = Mock(groovy.util.NodeList)
+        // Initialization of a mocked node
+        Node parent= Mock(Node)
+        StringBuilder bodyText = new StringBuilder("This chain of characters has a length > 0")
+        // Initialization of a real XmlParser object
+        XmlParser xmlParser = new XmlParser()
+        // setting up the node parent and the bodyText of the XmlParser object
+        xmlParser.setParent(parent)
+        xmlParser.setBodyText(bodyText)
+        parent.children() >> list
+
+        when: "When calling the addTextToNode method"
+        xmlParser.setTrimWhitespace(true)
+        xmlParser.addTextToNode()
+
+        then: "the parent.children() that return the 'list' object that we just create should be invoked," +
+                "therefore, it should invoke also its add() method"
+        1 * list.add(_ as String)
+    }
 
 
 
